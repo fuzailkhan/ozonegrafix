@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ozone Grafix</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sign-shop spec sheet. Paper ground, plotter cut-lines, registration marks, CMYK swatches as the one bold motif. */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --fg:#0f1b26; --muted:#4f6070; --line:#cdd6de;
+  --accent:#0b6e99; --accent-fg:#ffffff; --cut:#d1146b; --band:#0f1b26; --band-fg:#eef3f7; --band-muted:#9db0c0;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"DM Sans","Segoe UI",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c141c; --surface:#142130; --fg:#e8eef3; --muted:#9db0c0; --line:#2a3c4e;
+  --accent:#4cc3f0; --accent-fg:#06222f; --cut:#ff5fa8; --band:#070d13; --band-fg:#e8eef3; --band-muted:#8ea3b4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c141c; --surface:#142130; --fg:#e8eef3; --muted:#9db0c0; --line:#2a3c4e;
+  --accent:#4cc3f0; --accent-fg:#06222f; --cut:#ff5fa8; --band:#070d13; --band-fg:#e8eef3; --band-muted:#8ea3b4; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6}
+h1,h2,h3{font-family:var(--font-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.015em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+section{padding-block:72px}
+.sec-head{display:grid;gap:12px;max-width:680px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(28px,4.6vw,44px);font-weight:800}
+.sec-head p{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:4px;font-weight:600;text-decoration:none;border:2px solid var(--fg);cursor:pointer;font-family:var(--font-body);font-size:16px;background:transparent;color:var(--fg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.btn:hover{transform:translateY(-1px)}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.logo{font-family:var(--font-display);font-weight:800;font-size:22px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:26px;height:26px;border-radius:50%;border:5px solid var(--accent);display:inline-block;position:relative}
+.logo i::after{content:"";position:absolute;right:-6px;top:-6px;width:9px;height:9px;background:var(--cut);border-radius:50%}
+nav{display:flex;gap:22px;font-size:15px;font-weight:500}
+nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--fg)}
+@media(max-width:760px){nav{display:none}}
+
+/* hero */
+.hero{padding-block:56px 64px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(38px,7vw,76px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{margin-top:20px;font-size:18px;color:var(--muted);max-width:540px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .loc{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 18px}
+.swatches{display:flex;gap:0;margin-top:30px;max-width:260px;height:10px}
+.swatches span{flex:1}
+.cut-art{width:100%;max-width:100%;height:auto;display:block;color:var(--fg)}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
+.svc{background:var(--surface);border:1px solid var(--line);padding:24px;display:grid;gap:10px;align-content:start;min-width:0}
+.svc h3{font-size:21px;font-weight:700}
+.svc p{color:var(--muted);font-size:15px}
+.svc ul{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
+.svc .tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.svc svg{width:44px;height:44px;color:var(--accent)}
+
+/* builders band */
+.band{background:var(--band);color:var(--band-fg)}
+.band .label,.band .sec-head p{color:var(--band-muted)}
+.b-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:860px){.b-grid{grid-template-columns:1fr}}
+.b-list{display:grid;gap:0;border-top:1px solid #2b3e50}
+.b-list div{padding:16px 0;border-bottom:1px solid #2b3e50;display:grid;grid-template-columns:150px 1fr;gap:16px}
+@media(max-width:520px){.b-list div{grid-template-columns:1fr;gap:4px}}
+.b-list b{font-family:var(--font-display);font-size:17px}
+.b-list span{color:var(--band-muted);font-size:15px}
+.sheet{background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:24px;position:relative}
+.sheet::before,.sheet::after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--cut)}
+.sheet::before{top:-8px;left:-8px;border-right:0;border-bottom:0}
+.sheet::after{bottom:-8px;right:-8px;border-left:0;border-top:0}
+.sheet h3{font-size:20px;margin:6px 0 14px}
+.sheet table{width:100%;border-collapse:collapse;font-size:14px}
+.sheet td{padding:9px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+.sheet td:first-child{font-family:var(--font-mono);font-size:12px;color:var(--muted);width:42%;padding-right:12px}
+.note{margin-top:14px;font-size:13px;color:var(--muted)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--fg)}
+@media(max-width:900px){.steps{grid-template-columns:1fr}}
+.step{padding:20px 18px 20px 0;border-bottom:1px solid var(--line);min-width:0}
+@media(min-width:901px){.step{border-bottom:0}}
+.step .label{color:var(--accent)}
+.step h3{font-size:19px;margin:8px 0 6px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* materials */
+.mat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.mat div{border-left:3px solid var(--accent);padding:4px 0 4px 16px}
+.mat b{display:block;font-family:var(--font-display);font-size:18px}
+.mat span{color:var(--muted);font-size:14px}
+
+/* portfolio placeholder */
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:700px){.ph-grid{grid-template-columns:1fr 1fr}}
+.ph{aspect-ratio:4/3;max-width:100%;border:2px dashed var(--line);display:grid;place-items:center;text-align:center;padding:12px;color:var(--muted);font-size:13px;font-family:var(--font-mono)}
+
+/* faq */
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);max-width:68ch}
+
+/* quote */
+.quote{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:860px){.quote{grid-template-columns:1fr}}
+form{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);padding:24px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+label{display:grid;gap:6px;font-size:14px;font-weight:600;min-width:0}
+input,select,textarea{font:inherit;padding:11px 12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:4px;width:100%;min-width:0}
+textarea{min-height:96px;resize:vertical}
+.out{background:var(--bg);border:1px dashed var(--line);padding:14px;font-family:var(--font-mono);font-size:13px;white-space:pre-wrap;word-break:break-word}
+.contact-list{display:grid;gap:14px;margin-top:8px}
+.contact-list div{display:grid;gap:2px}
+.contact-list b{font-size:17px}
+.todo{color:var(--cut);font-family:var(--font-mono);font-size:13px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><i></i>Ozone Grafix</a>
+    <nav>
+      <a href="#services">Services</a><a href="#builders">Builders &amp; developers</a><a href="#process">Process</a><a href="#faq">FAQ</a><a href="#quote">Get a quote</a>
+    </nav>
+    <a class="btn primary" href="#quote" style="padding:9px 16px;font-size:14px">Get a quote</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="label">Signage · Vinyl · Window film · Bommasandra, Bangalore</p>
+      <h1 style="margin-top:14px">Your design, <em>our work</em>, on any surface.</h1>
+      <p class="lede">Vehicle and bike stickering, vinyl wraps, sun control film, frosted glass film and LED and acrylic sign boards. Cut, printed and fitted for shops, offices, homes and new construction sites.</p>
+      <div class="cta">
+        <a class="btn primary" href="#quote">Request a quote</a>
+        <a class="btn" href="#builders">Builders and developers</a>
+      </div>
+      <div class="loc">
+        <a class="label" href="https://www.instagram.com/ozone_grafix/" target="_blank" rel="noopener">Instagram @ozone_grafix ↗</a>
+        <a class="label" href="https://share.google/SuHGlNIlfJaFBQzWm" target="_blank" rel="noopener">Find us on Google Maps ↗</a>
+      </div>
+      <div class="swatches" aria-hidden="true"><span style="background:#00aeef"></span><span style="background:#ec008c"></span><span style="background:#fff200"></span><span style="background:#111"></span></div>
+    </div>
+    <svg class="cut-art" viewBox="0 0 400 320" role="img" aria-label="Plotter cut-line drawing of a motorcycle tank graphic with registration marks">
+      <g fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20 20h24M20 20v24M380 20h-24M380 20v24M20 300h24M20 300v-24M380 300h-24M380 300v-24" stroke="#d1146b" stroke-width="2.5"/>
+        <path d="M60 210c20-70 70-110 130-110 40 0 60 20 90 20 30 0 50-12 60-30 8 40-10 80-50 100-30 14-60 14-90 10-30-4-60 4-90 14-24 8-44 4-50-4z" stroke-dasharray="6 5"/>
+        <path d="M110 190c20-40 60-62 100-62" stroke-dasharray="2 4"/>
+        <circle cx="120" cy="240" r="38"/><circle cx="120" cy="240" r="8"/><circle cx="300" cy="240" r="38"/><circle cx="300" cy="240" r="8"/>
+        <path d="M120 240l60-40h60l60 40M180 200l-14-44h36"/>
+        <path d="M60 280h280" stroke-dasharray="3 6"/>
+      </g>
+      <text x="22" y="312" font-family="JetBrains Mono,monospace" font-size="9" fill="currentColor" opacity=".7">CUT LINE · 1:1 · VINYL 3M-GRADE</text>
+    </svg>
+  </div>
+</section>
+
+<section id="services" style="padding-top:24px">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">What we do</p><h2>Six kinds of work, one workshop.</h2><p>Tell us the surface and the result you want. We recommend the material, make the artwork ready and fit it.</p></div>
+    <div class="svc-grid">
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="34" r="7"/><circle cx="36" cy="34" r="7"/><path d="M12 34l9-14h10l5 14M21 20l-3-6h-5"/></svg><span class="tag">Bike &amp; car</span><h3>Vehicle stickering</h3><p>Tank graphics, fairing decals, reflective strips, racing numbers, brand lettering for fleets.</p><ul><li>Custom design to your idea</li><li>Cut vinyl and printed graphics</li></ul></article>
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="14" width="38" height="20" rx="4"/><path d="M5 24h38" stroke-dasharray="4 3"/></svg><span class="tag">Colour change</span><h3>Vinyl wrapping</h3><p>Full or partial wraps for vehicles, furniture, doors, lift cabins and counters in gloss, matt, satin and textures.</p></article>
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="8" y="6" width="32" height="36"/><path d="M8 6l32 36M8 22l18-16M22 42l18-18"/></svg><span class="tag">Glass</span><h3>Sun control film</h3><p>Reduces heat and glare on office, home and showroom glass. Choose the shade and the level of privacy.</p></article>
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="8" y="6" width="32" height="36"/><path d="M14 14h20M14 22h20M14 30h12" stroke-dasharray="2 4"/></svg><span class="tag">Privacy &amp; design</span><h3>Frosted glass film</h3><p>Plain frost, patterned and cut-logo frosted film for cabins, meeting rooms, bathrooms and partitions.</p></article>
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="12" width="40" height="20" rx="2"/><path d="M24 32v10M16 42h16M12 22h24"/></svg><span class="tag">Shopfront</span><h3>LED &amp; acrylic sign boards</h3><p>Lit and unlit name boards, 3D letters, glow signs and shop branding, listed on Justdial under acrylic sign boards.</p></article>
+      <article class="svc"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 40V12l12-6 12 6 12-6v28l-12 6-12-6z"/></svg><span class="tag">Anything flat</span><h3>Other design wraps and pasting</h3><p>Wall graphics, floor and window lettering, pasting on boards and panels. Send a photo of the surface.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="builders" class="band">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">For builders, developers and contractors</p><h2>Signage and glass films for projects, not just single jobs.</h2><p>New projects need many items made to one standard and installed on a site schedule. We quote the whole package so your team deals with one vendor.</p></div>
+    <div class="b-grid">
+      <div class="b-list">
+        <div><b>Site hoardings</b><span>Printed hoarding and barricade branding for launch and construction phase.</span></div>
+        <div><b>Project name boards</b><span>Entrance boards, acrylic and LED, fixed to the project drawing.</span></div>
+        <div><b>Wayfinding</b><span>Tower, floor and unit numbers, directional signs, parking and safety signage.</span></div>
+        <div><b>Glass films</b><span>Sun control for glazing, frosted film for cabins and sales-office partitions.</span></div>
+        <div><b>Sales office &amp; show flat</b><span>Wall graphics, wraps and lettering ready before the first site visit.</span></div>
+        <div><b>Turnover &amp; rebranding</b><span>Replace or refresh signs and film when a project changes hands.</span></div>
+      </div>
+      <div class="sheet">
+        <p class="label">Sample quote sheet · what we ask for</p>
+        <h3>Information that lets us price a project quickly</h3>
+        <table>
+          <tr><td>Project name</td><td>Tower / villa / commercial block</td></tr>
+          <tr><td>Items</td><td>Boards, wayfinding, film, wraps</td></tr>
+          <tr><td>Quantity</td><td>Per tower, per floor or per unit</td></tr>
+          <tr><td>Drawings</td><td>Signage layout or brand guidelines</td></tr>
+          <tr><td>Site schedule</td><td>Target install dates, access hours</td></tr>
+          <tr><td>Site survey</td><td>Measurements taken before we fix a price</td></tr>
+        </table>
+        <p class="note">This table shows how a quote is prepared. It does not list past projects.</p>
+        <a class="btn primary" style="margin-top:16px" href="#quote">Send project details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">How a job runs</p><h2>From a photo and a rough idea to a fitted finish.</h2></div>
+    <div class="steps">
+      <div class="step"><span class="label">Step 1</span><h3>Enquiry</h3><p>Send the surface, size and idea by WhatsApp or the form below.</p></div>
+      <div class="step"><span class="label">Step 2</span><h3>Measure</h3><p>Site visit for projects and large glass. Photos are enough for small jobs.</p></div>
+      <div class="step"><span class="label">Step 3</span><h3>Design proof</h3><p>You approve the artwork on screen before anything is cut or printed.</p></div>
+      <div class="step"><span class="label">Step 4</span><h3>Production</h3><p>Plotter cutting, printing and board fabrication in the workshop.</p></div>
+      <div class="step"><span class="label">Step 5</span><h3>Fitting</h3><p>Clean surface, careful application and a final check with you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Materials and finishes</p><h2>Pick the look and how long it should last.</h2></div>
+    <div class="mat">
+      <div><b>Gloss, matt, satin</b><span>Vinyl wraps and stickers</span></div>
+      <div><b>Carbon and textures</b><span>Panels, bike parts, interiors</span></div>
+      <div><b>Reflective</b><span>Safety strips and fleet marking</span></div>
+      <div><b>Dark to light tints</b><span>Sun control film shades</span></div>
+      <div><b>Plain and patterned frost</b><span>Privacy and design on glass</span></div>
+      <div><b>Acrylic and LED</b><span>Lit and unlit boards</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><p class="label">Recent work</p><h2>Before and after, from the workshop.</h2><p>See the latest fitted jobs on Instagram. Real project photos can be placed in these slots.</p></div>
+    <div class="ph-grid">
+      <div class="ph">Photo slot<br>bike stickering</div><div class="ph">Photo slot<br>frosted film</div><div class="ph">Photo slot<br>sun control film</div>
+      <div class="ph">Photo slot<br>vinyl wrap</div><div class="ph">Photo slot<br>sign board</div><div class="ph">Photo slot<br>project signage</div>
+    </div>
+    <p style="margin-top:18px"><a class="btn" href="https://www.instagram.com/ozone_grafix/" target="_blank" rel="noopener">View work on Instagram ↗</a></p>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap" style="max-width:820px">
+    <div class="sec-head"><p class="label">Questions</p><h2>Before you ask.</h2></div>
+    <details><summary>How do I get a price?</summary><p>Send a photo of the surface, its approximate size and what you want on it. For glass and projects we measure on site before fixing the price.</p></details>
+    <details><summary>Does sun control film reduce heat?</summary><p>Yes, it cuts solar heat and glare. The amount depends on the film and the glass. We will suggest a shade for your windows.</p></details>
+    <details><summary>Can I give my own design?</summary><p>Yes. Send a vector file (AI, CDR, PDF) or a clear image. We can also create or clean up the artwork.</p></details>
+    <details><summary>Will a wrap damage my vehicle paint?</summary><p>Quality vinyl applied on healthy factory paint can be removed later. Repainted or damaged paint is checked before we start.</p></details>
+    <details><summary>Do you work on large projects for builders?</summary><p>Yes. Send drawings and a quantity list. We quote boards, wayfinding, hoardings and glass film together and plan installation around your site schedule.</p></details>
+  </div>
+</section>
+
+<section id="quote" class="band">
+  <div class="wrap quote">
+    <div>
+      <p class="label">Get a quote</p>
+      <h2 style="font-size:clamp(28px,4.6vw,44px);margin:12px 0 16px">Tell us the job. We reply with a price.</h2>
+      <p style="color:var(--band-muted);max-width:46ch">Fill the form to build a ready message. Copy it and send it to us on WhatsApp or by phone.</p>
+      <div class="contact-list">
+        <div><span class="label">Area</span><b>Bommasandra, Bangalore</b></div>
+        <div><span class="label">Phone / WhatsApp</span><b id="phoneShow" class="todo">Number to be added by owner</b></div>
+        <div><span class="label">Full address</span><b class="todo" id="addrShow">Address to be added by owner</b></div>
+        <div><span class="label">Social</span><b><a href="https://www.instagram.com/ozone_grafix/" target="_blank" rel="noopener">Instagram @ozone_grafix ↗</a> · <a href="https://share.google/SuHGlNIlfJaFBQzWm" target="_blank" rel="noopener">Google Maps ↗</a></b></div>
+      </div>
+    </div>
+    <form id="qform" style="color:var(--fg)">
+      <div class="row2">
+        <label for="fname">Name<input id="fname" autocomplete="name" placeholder="Your name"></label>
+        <label for="fcomp">Company (optional)<input id="fcomp" autocomplete="organization" placeholder="Builder / firm"></label>
+      </div>
+      <label for="ftype">Customer type<select id="ftype"><option>Individual</option><option>Shop or office</option><option>Builder or developer</option><option>Interior designer or contractor</option></select></label>
+      <label for="fsvc">Service<select id="fsvc"><option>Vehicle or bike stickering</option><option>Vinyl wrapping</option><option>Sun control film</option><option>Frosted film</option><option>LED or acrylic sign board</option><option>Other design wrap or pasting</option><option>Project signage package</option></select></label>
+      <div class="row2">
+        <label for="fsize">Size or quantity<input id="fsize" placeholder="e.g. 10 windows, 120 sq ft"></label>
+        <label for="floc">Site location<input id="floc" placeholder="Area in Bangalore"></label>
+      </div>
+      <label for="fnote">Details<textarea id="fnote" placeholder="Surface, colours, deadline"></textarea></label>
+      <button class="btn primary" type="submit" style="justify-content:center">Build my message</button>
+      <div id="result" hidden>
+        <div class="out" id="msg"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+          <button class="btn" type="button" id="copy" style="padding:9px 16px;font-size:14px">Copy message</button>
+          <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener" hidden style="padding:9px 16px;font-size:14px">Open WhatsApp ↗</a>
+        </div>
+        <p class="note" id="copied" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot"><span>© Ozone Grafix, Bommasandra, Bangalore</span><span>Stickering · Vinyl · Window film · Signage</span></div>
+</footer>
+
+<script>
+// Owner: fill these in. WhatsApp number in international format without +, e.g. "919XXXXXXXXX".
+var CONFIG = { whatsapp: "", phoneDisplay: "", address: "" };
+(function(){
+  var $ = function(id){return document.getElementById(id)};
+  if (CONFIG.phoneDisplay){ $("phoneShow").textContent = CONFIG.phoneDisplay; $("phoneShow").className=""; }
+  if (CONFIG.address){ $("addrShow").textContent = CONFIG.address; $("addrShow").className=""; }
+  $("qform").addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = function(id){return $(id).value.trim()};
+    var lines = ["Hello Ozone Grafix, I would like a quote.",
+      "Name: " + (v("fname")||"-"),
+      v("fcomp") ? "Company: " + v("fcomp") : null,
+      "Customer type: " + v("ftype"),
+      "Service: " + v("fsvc"),
+      "Size / quantity: " + (v("fsize")||"-"),
+      "Location: " + (v("floc")||"-"),
+      "Details: " + (v("fnote")||"-")].filter(Boolean);
+    var text = lines.join("\n");
+    $("msg").textContent = text; $("result").hidden = false; $("copied").textContent = "";
+    if (CONFIG.whatsapp){ $("wa").href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text); $("wa").hidden = false; }
+  });
+  $("copy").addEventListener("click", function(){
+    var t = $("msg").textContent;
+    var ok = function(){ $("copied").textContent = "Message copied. Paste it into WhatsApp or a text." };
+    var fail = function(){ var r=document.createRange(); r.selectNodeContents($("msg")); var s=getSelection(); s.removeAllRanges(); s.addRange(r); $("copied").textContent = "Message selected. Copy it manually." };
+    try { navigator.clipboard.writeText(t).then(ok, fail) } catch(e){ fail() }
+  });
+})();
+</script>
+
+</body></html>
